@@ -10,7 +10,7 @@ class CardSwipper extends StatelessWidget {
 
     final size = MediaQuery.of(context).size;
     return Container(
-      color: Colors.cyanAccent, 
+
       width: double.infinity,
       height: size.height * 0.3,
       child: Swiper(
@@ -19,9 +19,22 @@ class CardSwipper extends StatelessWidget {
         itemHeight: size.height * 0.6,
         itemWidth: size.width * 0.4,
         itemBuilder: (_, index){
-          return const FadeInImage(
-            placeholder: AssetImage('assets/load.gif'), 
-            image: NetworkImage('https://via.placeholder.com/300x400'));
+          return Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.pushNamed(context, 'details', arguments: 'Args');
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: const FadeInImage(
+                  placeholder: AssetImage('assets/load.gif'), 
+                  image: NetworkImage('https://via.placeholder.com/300x400'),
+                  fit: BoxFit.cover,
+                  ),
+              ),
+            ),  
+          );
         },
       )
       );
