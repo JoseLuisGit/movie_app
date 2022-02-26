@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         'home' : (context)=> const HomeScreen(),
-        'details': (context)=> const DetailsScreen()
+        'details': (context)=> DetailsScreen()
       },
       theme: ThemeData.light().copyWith(
         appBarTheme: const AppBarTheme(
