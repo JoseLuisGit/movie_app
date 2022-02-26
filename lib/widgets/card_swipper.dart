@@ -12,12 +12,12 @@ class CardSwipper extends StatelessWidget {
     return Container(
       color: Colors.lightBlue,
       width: double.infinity,
-      height: size.height * 0.30,
+      height: size.height * 0.40,
       child: Swiper(
         layout: SwiperLayout.STACK,
         itemCount: 10,
-        itemHeight: size.height * 0.6,
-        itemWidth: size.width * 0.4,
+        itemHeight: size.height * 0.35,
+        itemWidth: size.width * 0.5,
         itemBuilder: (_, index){
           return Padding(
             padding: const EdgeInsets.all(8.0),
