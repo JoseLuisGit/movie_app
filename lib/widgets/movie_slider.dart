@@ -37,7 +37,7 @@ class _MoviePoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Container(
         color: Colors.deepOrange,
         height: double.infinity,
