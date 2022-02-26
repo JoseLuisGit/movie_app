@@ -18,7 +18,8 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Column(
         children: const [
-          CardSwipper()
+          CardSwipper(),
+          MovieSlider()
         ],
       ),
     );

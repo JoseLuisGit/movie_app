@@ -10,9 +10,9 @@ class CardSwipper extends StatelessWidget {
 
     final size = MediaQuery.of(context).size;
     return Container(
-
+      color: Colors.lightBlue,
       width: double.infinity,
-      height: size.height * 0.3,
+      height: size.height * 0.30,
       child: Swiper(
         layout: SwiperLayout.STACK,
         itemCount: 10,
@@ -20,7 +20,7 @@ class CardSwipper extends StatelessWidget {
         itemWidth: size.width * 0.4,
         itemBuilder: (_, index){
           return Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: (){
                 Navigator.pushNamed(context, 'details', arguments: 'Args');
