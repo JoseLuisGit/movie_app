@@ -23,6 +23,7 @@ class CardSwipper extends StatelessWidget {
         itemHeight: size.height * 0.35,
         itemWidth: size.width * 0.5,
         itemBuilder: (_, index){
+          final movie = movies[index];
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
@@ -33,7 +34,7 @@ class CardSwipper extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 child: FadeInImage(
                   placeholder: const AssetImage('assets/load.gif'), 
-                  image: NetworkImage(movies[index].getPosterPath),
+                  image: NetworkImage(movie.getPosterPath),
                   fit: BoxFit.cover,
                   ),
               ),
