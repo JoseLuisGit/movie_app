@@ -9,6 +9,8 @@ class MoviesProvider extends ChangeNotifier {
   final _language = 'es-ES';
   final _baseUrl = 'api.themoviedb.org';
 
+  int _popularPage = 1;
+
   List<Movie> movies = [];
   List<Movie> popularMovies = [];
 
@@ -36,7 +38,10 @@ class MoviesProvider extends ChangeNotifier {
   }
 
   getOnPopularMovies() async {
-    final jsonData = await _getJsonData('3/movie/popular');
+
+    _popularPage++;
+
+    final jsonData = await _getJsonData('3/movie/popular', _popularPage);
     PopularMoviesResponse nowPlayingResponse =
         PopularMoviesResponse.fromJson(jsonData);
     popularMovies = [...popularMovies, ...nowPlayingResponse.results];

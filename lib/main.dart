@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       initialRoute: 'home',
       debugShowCheckedModeBanner: false,
       routes: {
-        'home' : (context)=> const HomeScreen(),
+        'home' : (context)=>  const HomeScreen(),
         'details': (context)=> DetailsScreen()
       },
       theme: ThemeData.light().copyWith(
