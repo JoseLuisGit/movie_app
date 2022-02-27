@@ -2,11 +2,31 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/models.dart';
 
-class MovieSlider extends StatelessWidget {
+class MovieSlider extends StatefulWidget {
 
-  final List<Movie> popularMovies; 
+  final List<Movie> movies; 
   final String? title;
-  const MovieSlider({Key? key, required this.popularMovies, this.title}) : super(key: key);
+  final Function onNextList;
+  const MovieSlider({Key? key, required this.movies, this.title, required this.onNextList}) : super(key: key);
+
+  @override
+  State<MovieSlider> createState() => _MovieSliderState();
+}
+
+class _MovieSliderState extends State<MovieSlider> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    
+    _scrollController.addListener(() {
+      if(_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 200){
+        widget.onNextList();
+      }
+    });
+    super.initState();
+  }
+   
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +36,18 @@ class MovieSlider extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if(title != null)
+          if(widget.title != null)
             Padding(
-              padding:  EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-              child:  Text(title!, style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 18 ),)
+              padding:  const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              child:  Text(widget.title!, style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 18 ),)
             ),
           Expanded(
             child: ListView.builder(
+              controller: _scrollController,
               scrollDirection: Axis.horizontal,
-              itemCount: popularMovies.length,
+              itemCount: widget.movies.length,
               itemBuilder: (_, index) {
-                final movie = popularMovies[index];
+                final movie = widget.movies[index];
                 return _MoviePoster(movie: movie,);
               }
               ),
