@@ -16,7 +16,6 @@ class MoviesProvider extends ChangeNotifier{
 
   List<Movie> movies = [];
   List<Movie> popularMovies = [];
-  bool loading = true;
 
   MoviesProvider(){
     getOnDisplayMovies();
@@ -54,13 +53,5 @@ class MoviesProvider extends ChangeNotifier{
     notifyListeners();
 
     }
-
-
-  getLoading(){
-    loading = movies.isNotEmpty;
-    notifyListeners();
-  }
-
-
 
 }
