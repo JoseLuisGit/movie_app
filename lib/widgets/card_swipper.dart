@@ -37,7 +37,7 @@ class CardSwipper extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: (){
-                Navigator.pushNamed(context, 'details', arguments: 'Args');
+                Navigator.pushNamed(context, 'details', arguments: movie);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
