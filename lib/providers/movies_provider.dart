@@ -4,14 +4,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+
+import 'package:movie_app/models/models.dart';
+
 class MoviesProvider extends ChangeNotifier{
 
   final _apiKey = 'a841e2c23fe58300a5d815470e79cdbe';
   final _language = 'es-ES';
   final _baseUrl = 'api.themoviedb.org';
 
+  List<Movie> movies = [];
+
   MoviesProvider(){
-    print('init movies provider');
     getOnDisplayMovies();
   }
 
@@ -25,11 +29,14 @@ class MoviesProvider extends ChangeNotifier{
 
     final response = await http.get(url);
 
-    final decodedData = json.decode(response.body);
+    final nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
 
-    print(decodedData);
+    movies = nowPlayingResponse.results;
 
   }
+
+  @override
+  notifyListeners();
 
 
 }
