@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 
 import 'package:movie_app/models/models.dart';
+import 'package:movie_app/models/popular_movies_response.dart';
 
 class MoviesProvider extends ChangeNotifier{
 
@@ -14,11 +15,12 @@ class MoviesProvider extends ChangeNotifier{
   final _baseUrl = 'api.themoviedb.org';
 
   List<Movie> movies = [];
+  List<Movie> popularMovies = [];
   bool loading = true;
 
   MoviesProvider(){
-    print('Hello');
     getOnDisplayMovies();
+    getOnPopularMovies();
   }
 
 
@@ -29,14 +31,29 @@ class MoviesProvider extends ChangeNotifier{
       'page' : '1'
     });
 
-
     final response = await http.get(url);
 
     NowPlayingResponse nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
     movies = nowPlayingResponse.results;
-    
+
     notifyListeners();
   }
+
+   getOnPopularMovies() async{
+      var url = Uri.https(_baseUrl, '3/movie/popular', {
+      'api_key' : _apiKey,
+      'language': _language,
+      'page' : '1'
+    });
+
+    final response = await http.get(url);
+
+    PopularMoviesResponse nowPlayingResponse = PopularMoviesResponse.fromJson(response.body);
+    popularMovies = [ ...popularMovies, ...nowPlayingResponse.results];
+
+    notifyListeners();
+
+    }
 
 
   getLoading(){

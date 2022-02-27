@@ -1,7 +1,11 @@
+
 import 'package:flutter/material.dart';
+import 'package:movie_app/models/models.dart';
 
 class MovieSlider extends StatelessWidget {
-  const MovieSlider({Key? key}) : super(key: key);
+
+  final List<Movie> popularMovies; 
+  const MovieSlider({Key? key, required this.popularMovies}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +22,11 @@ class MovieSlider extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 20,
-              itemBuilder: (_, index) => const _MoviePoster()
+              itemCount: popularMovies.length,
+              itemBuilder: (_, index) {
+                final movie = popularMovies[index];
+                return _MoviePoster(movie: movie,);
+              }
               ),
           ),
         ],
@@ -29,8 +36,11 @@ class MovieSlider extends StatelessWidget {
 }
 
 class _MoviePoster extends StatelessWidget {
+
+  final Movie movie ;
   const _MoviePoster({
     Key? key,
+    required this.movie
   }) : super(key: key);
 
   @override
@@ -41,25 +51,23 @@ class _MoviePoster extends StatelessWidget {
         padding: const EdgeInsets.symmetric( horizontal: 10),
         child: Container(
           height: double.infinity,
-          width: 150,
+          width: 140,
           child: Column(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: const FadeInImage(
-                  placeholder: AssetImage('assets/no-image.jpg'), 
-                  image: NetworkImage('https://via.placeholder.com/300x400'),
+                child: FadeInImage(
+                  placeholder: const AssetImage('assets/no-image.jpg'), 
+                  image: NetworkImage(movie.getPosterPath),
                   fit: BoxFit.cover,
                   ),
               ),
-                const Expanded(
-                  child: Text('Ricky y Morty: La pelicula de todos los universos mundiales', 
+                Expanded(
+                  child: Text(movie.title, 
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 15
-                      ),
+                      style: const TextStyle( fontSize: 14),
                       ),
                 )
               
