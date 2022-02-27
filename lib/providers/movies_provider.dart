@@ -14,8 +14,10 @@ class MoviesProvider extends ChangeNotifier{
   final _baseUrl = 'api.themoviedb.org';
 
   List<Movie> movies = [];
+  bool loading = true;
 
   MoviesProvider(){
+    print('Hello');
     getOnDisplayMovies();
   }
 
@@ -27,16 +29,21 @@ class MoviesProvider extends ChangeNotifier{
       'page' : '1'
     });
 
+
     final response = await http.get(url);
 
-    final nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
-
+    NowPlayingResponse nowPlayingResponse = NowPlayingResponse.fromJson(response.body);
     movies = nowPlayingResponse.results;
-
+    
+    notifyListeners();
   }
 
-  @override
-  notifyListeners();
+
+  getLoading(){
+    loading = movies.isNotEmpty;
+    notifyListeners();
+  }
+
 
 
 }
