@@ -17,7 +17,7 @@ class DetailsScreen extends StatelessWidget {
               [
                 _PosterMovie( movie: movie,),
                 _OverView(description: movie.overview,),
-                CastingCard()
+                CastingCard(movieId: movie.id,)
               ]
             )
             )
@@ -96,7 +96,8 @@ class _PosterMovie extends StatelessWidget {
                       const Icon(Icons.star_border_outlined, size: 15,),
                       Text(movie.voteAverage.toString(), style: textTheme.caption, overflow: TextOverflow.ellipsis,)
                     ],
-                  )
+                  ),
+                  Text(movie.releaseDate.toString(), style: textTheme.caption,)
                 ],
                 ),
             )

@@ -69,7 +69,7 @@ class _MoviePoster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()=>Navigator.pushNamed(context, 'details', arguments: 'movie-params'),
+      onTap: ()=>Navigator.pushNamed(context, 'details', arguments: movie),
       child: Padding(
         padding: const EdgeInsets.symmetric( horizontal: 10),
         child: Container(
