@@ -49,18 +49,22 @@ class SearchMovieDelegate extends SearchDelegate {
           itemCount: movies.length,
           itemBuilder: (_, index){
             Movie movie = movies[index];
-            return ListTile(
-              leading: FadeInImage(
-                placeholder: const AssetImage('assets/no-image.jpg'), 
-                image: NetworkImage(movie.getPosterPath),
-                fit: BoxFit.cover,
-                width: 45,
-                height: double.infinity,
-                ),
-               title: Text(movie.title),
-               subtitle: Text(movie.originalTitle),
-               onTap: ()=>Navigator.pushNamed(context, 'details', arguments: movie),
-            
+            movie.heroId = 'search-${movie.id}';
+            return Hero(
+              tag: movie.heroId!,
+              child: ListTile(
+                leading: FadeInImage(
+                  placeholder: const AssetImage('assets/no-image.jpg'), 
+                  image: NetworkImage(movie.getPosterPath),
+                  fit: BoxFit.cover,
+                  width: 45,
+                  height: double.infinity,
+                  ),
+                 title: Text(movie.title),
+                 subtitle: Text(movie.originalTitle),
+                 onTap: ()=>Navigator.pushNamed(context, 'details', arguments: movie),
+              
+              ),
             );
           }
           );
