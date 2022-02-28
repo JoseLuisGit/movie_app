@@ -1,46 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/models/models.dart';
+import 'package:movie_app/providers/movies_provider.dart';
+
+import 'package:provider/provider.dart';
 
 class CastingCard extends StatelessWidget {
-  const CastingCard({Key? key}) : super(key: key);
+  final int movieId;
+  const CastingCard({Key? key, required this.movieId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+
+    MoviesProvider moviesProvider = Provider.of<MoviesProvider>(context);
+
+    return FutureBuilder(
+      future: moviesProvider.getCastMovie(movieId),
+      builder: (context,snapshot){
+
+        if(!snapshot.hasData){
+          return const SizedBox(
+            height: 100,
+            child: Center(
+              child: CircularProgressIndicator(),
+            )
+          );
+        }
+
+        final List<Cast> cast = snapshot.data as List<Cast>;
+      return Container(
       width: double.infinity,
-      height: 200,
+      height: 210,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (_, __){
-          return _CastCard();
+        itemCount: cast.length,
+        itemBuilder: (_, index){
+          return _CastCard(cast: cast[index],);
         }
         ),
     );
+      }
+      );
+
+
   }
 }
 
 class _CastCard extends StatelessWidget {
+
+  final Cast cast;
+
+  const _CastCard({Key? key, required this.cast}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(8),
       width: 100,
+      height: double.infinity,
       child: Column(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: const FadeInImage(
-              placeholder: AssetImage('assets/no-image.jpg'), 
-              image: NetworkImage('https://via.placeholder.com/100x150'),
-              fit: BoxFit.cover
+            child: FadeInImage(
+              placeholder: const AssetImage('assets/no-image.jpg'), 
+              image: NetworkImage(cast.getFullProfilePath),
+              fit: BoxFit.cover,
+              width: 100,
+              height: 150,
               ),
           ),
-            Text('movie.actor oyldnaa lorem lorem', 
+            Text(cast.originalName, 
             style: Theme.of(context).textTheme.subtitle2, 
             overflow: TextOverflow.ellipsis, maxLines: 2,
             textAlign: TextAlign.center,
-            )
+            ),
+            Expanded(child: Text(cast.character?? 'not name', style: Theme.of(context).textTheme.caption, overflow: TextOverflow.ellipsis,))
         ],
 
         ),
