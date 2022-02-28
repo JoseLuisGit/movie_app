@@ -75,13 +75,16 @@ class _PosterMovie extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-           FadeInImage(
-            placeholder: const AssetImage('assets/no-image.jpg'), 
-            image: NetworkImage(movie.getPosterPath),
-            height: 200,
-            width: 150,
-            fit: BoxFit.cover,
-            ),
+           Hero(
+             tag: movie.heroId!,
+             child: FadeInImage(
+              placeholder: const AssetImage('assets/no-image.jpg'), 
+              image: NetworkImage(movie.getPosterPath),
+              height: 200,
+              width: 150,
+              fit: BoxFit.cover,
+              ),
+           ),
 
             const SizedBox(
               width: 10,
