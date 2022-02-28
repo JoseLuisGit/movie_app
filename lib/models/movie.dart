@@ -17,6 +17,7 @@ class Movie {
         required this.video,
         required this.voteAverage,
         required this.voteCount,
+        this.heroId
     });
 
     bool adult;
@@ -33,6 +34,8 @@ class Movie {
     bool video;
     double voteAverage;
     int voteCount;
+
+    String? heroId;
 
     get getPosterPath {
       if(posterPath == null) return 'https://programacion.net/files/article/20161110041116_image-not-found.png';
