@@ -79,6 +79,8 @@ class _PosterMovie extends StatelessWidget {
             placeholder: const AssetImage('assets/no-image.jpg'), 
             image: NetworkImage(movie.getPosterPath),
             height: 200,
+            width: 150,
+            fit: BoxFit.cover,
             ),
 
             const SizedBox(

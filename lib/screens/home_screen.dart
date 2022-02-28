@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:movie_app/providers/movies_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:movie_app/search/search_movie_delegate.dart';
 
 import 'package:movie_app/widgets/widgets.dart';
 
@@ -17,8 +18,11 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Movies'),
-        actions: const [
-          Icon(Icons.search)
+        actions: [
+          GestureDetector(
+            onTap: ()=>showSearch(context: context, delegate: SearchMovieDelegate()),
+            child: const Icon(Icons.search)
+            )
         ],
         elevation: 0,
       ),
